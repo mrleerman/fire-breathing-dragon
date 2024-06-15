@@ -1,0 +1,28 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@using Fluxor
+@using Frontend.Store.State
+
+@inject IState<CombatState> CombatState
+
+<div id="combatant-row">
+    @foreach (var combatantName in CombatState.Value.CombatantNames)
+    {
+        <div class="combatant px-2">
+            <img src="images/icon_Combatant.png" />
+            <span class="combatant-text">@combatantName</span>
+        </div>
+    }
+
+    @if(CombatState.Value.CombatantNames.Count == 0)
+    {
+        <div class="combatant placeholder px-2">
+            <img src="images/icon_Combatant.png" />
+            <span class="combatant-text">Placeholder</span>
+        </div>
+    }
+</div>
+
+@code {
+
+}

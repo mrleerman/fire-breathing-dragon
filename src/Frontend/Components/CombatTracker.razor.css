@@ -1,0 +1,29 @@
+﻿.banner-container {
+    align-items: center;
+    align-self: stretch;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#content-root {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.error-container {
+    color: red;
+    margin-top: auto;
+}
+
+img {
+    flex: 0;
+}
+
+#title-banner {
+    font-family: "TiamatCondensedSC";
+    color: #828282;
+}

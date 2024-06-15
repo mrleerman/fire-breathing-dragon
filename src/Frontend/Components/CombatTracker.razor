@@ -1,0 +1,38 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@using Fluxor
+@using Frontend.Store.State
+
+@inject IState<CombatState> CombatState
+
+<div id="content-root">
+    <div class="banner-container">
+        <h1 id="title-banner">Initiative Tracker</h1>
+    </div>
+
+    <div class="banner-container">
+        <img src="images/OrnateRedFrame.png" />
+    </div>
+
+    <CombatantDisplay></CombatantDisplay>
+
+    <div class="pt-4" id="combat-controls">
+        <CurrentCombatantControls></CurrentCombatantControls>
+
+        <RerollInitiative></RerollInitiative>
+
+        <RemoveCombatant></RemoveCombatant>
+
+        <AddCombatant></AddCombatant>
+    </div>
+    @if (CombatState.Value.HasCurrentErrors)
+    {
+        <div class="error-container">
+            @CombatState.Value.CurrentErrorMessage
+        </div>
+    }
+</div>
+
+@code {
+
+}

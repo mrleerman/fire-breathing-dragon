@@ -1,0 +1,32 @@
+﻿@using Fluxor
+@using Frontend.Store.Features.Combat.Actions.MoveToNextCombatant
+@using Frontend.Store.Features.Combat.Actions.MoveToPreviousCombatant
+
+@inject IDispatcher FluxorDispatcher
+
+<div id="combat-position-row">
+    <div class="button-container">
+        <input type="image" src="images/RedButton_Previous.png" @onclick="PreviousClick" />
+        <div class="button-text" @onclick="PreviousClick">
+            Previous
+        </div>
+    </div>
+    <div class="button-container">
+        <input type="image" src="images/RedButton_Next.png" @onclick="NextClick" />
+        <div class="button-text" @onclick="NextClick">
+            Next
+        </div>
+    </div>
+</div>
+
+@code {
+    private void NextClick()
+    {
+        FluxorDispatcher.Dispatch(new MoveToNextCombatantAction());
+    }
+
+    public void PreviousClick()
+    {
+        FluxorDispatcher.Dispatch(new MoveToPreviousCombatantAction());
+    }
+}

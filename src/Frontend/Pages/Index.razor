@@ -1,0 +1,33 @@
+﻿@inherits Fluxor.Blazor.Web.Components.FluxorComponent
+
+@using Fluxor
+@using Frontend.Components
+@using Frontend.Models
+@using Frontend.Store.Features.Connection.Actions.Connect
+@using Frontend.Store.State
+
+@inject IState<ConnectionState> ConnectionState
+@inject IDispatcher FluxorDispatcher
+@page "/"
+
+@if (ConnectionState.Value.ClientState == ClientState.Connecting)
+{
+    <Connecting></Connecting>
+}
+else if(ConnectionState.Value.ClientState == ClientState.Connected)
+{
+    <CombatTracker></CombatTracker>
+}
+else
+{
+    <span>Unknown ClientState</span>
+}
+
+@code {
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+
+        FluxorDispatcher.Dispatch(new ConnectAction());
+    }
+}
