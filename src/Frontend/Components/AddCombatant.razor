@@ -1,0 +1,51 @@
+﻿@using Fluxor
+@using Frontend.Services.CombatConnection
+@using Frontend.Store.Features.Combat.Actions.AddCombatant
+
+@inject IDispatcher FluxorDispatcher
+
+<div class="input-text-container pt-5 pb-2">
+    <input class="input-text" placeholder="Name" type="text" @bind-value="@NewCombatantName" />
+</div>
+
+<div class="input-text-container pb-2">
+    <input class="input-text" placeholder="Initiative Bonus" type="text" @bind-value="@NewCombatantInitiativeBonus" />
+</div>
+
+<div class="button-container">
+    <input type="image" src="images/simpleButton.png" @onclick="AddClick" />
+    <div class="button-text" @onclick="AddClick">
+        Add Combatant
+    </div>
+</div>
+
+@if (!_newCombatantNameIsValid)
+{
+    <div class="form-validation-error">Name Must Not Be Empty</div>
+}
+
+@if (!_newCombatantInitiativeBonusIsValid)
+{
+    <div class="form-validation-error">Initiative Bonus Must Be A Number</div>
+}
+
+@code {
+    private bool _newCombatantInitiativeBonusIsValid = true;
+    private bool _newCombatantNameIsValid = true;
+
+    private string? NewCombatantName { get; set; }
+    private string? NewCombatantInitiativeBonus { get; set; }
+
+    public void AddClick()
+    {
+        _newCombatantInitiativeBonusIsValid = int.TryParse(NewCombatantInitiativeBonus, out var parsedInitiativeBonus);
+        _newCombatantNameIsValid = !string.IsNullOrEmpty(NewCombatantName);
+
+        if (_newCombatantInitiativeBonusIsValid && _newCombatantNameIsValid)
+        {
+            FluxorDispatcher.Dispatch(new AddCombatantAction(NewCombatantName!, parsedInitiativeBonus));
+            NewCombatantInitiativeBonus = null;
+            NewCombatantName = null;
+        }
+    }
+}

@@ -1,0 +1,19 @@
+﻿@using Fluxor
+@using Frontend.Store.Features.Combat.Actions.RerollInitiative
+
+@inject IDispatcher FluxorDispatcher
+
+<div class="button-container">
+    <input type="image" src="images/RedButton.png" @onclick="RerollClick" />
+    <div class="button-text" @onclick="RerollClick">
+        Reroll Initiative
+    </div>
+</div>
+
+@code {
+
+    public void RerollClick()
+    {
+        FluxorDispatcher.Dispatch(new RerollInitiativeAction());
+    }
+}
